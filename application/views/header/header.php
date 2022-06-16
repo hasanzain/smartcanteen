@@ -85,7 +85,15 @@ if ($this->session->userdata('nip') == null) {
                             <a href="<?= base_url('monitoring') ?>" class="nav-link">
                                 <i class="fas fa-list"></i>
                                 <p>
-                                    Monitor
+                                    Absensi
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?= base_url('monitoring/riwayat') ?>" class="nav-link">
+                                <i class="fas fa-list"></i>
+                                <p>
+                                    Riwayat Absensi
                                 </p>
                             </a>
                         </li>
@@ -93,7 +101,7 @@ if ($this->session->userdata('nip') == null) {
                             <a href="<?= base_url('monitoring/user_list') ?>" class="nav-link">
                                 <i class="fas fa-list"></i>
                                 <p>
-                                    User List
+                                    Daftar user
                                 </p>
                             </a>
                         </li>
@@ -101,7 +109,7 @@ if ($this->session->userdata('nip') == null) {
                             <a href="<?= base_url('monitoring/realtime') ?>" class="nav-link">
                                 <i class="fas fa-list"></i>
                                 <p>
-                                    Real Time Location
+                                    Lokasi Terakhir
                                 </p>
                             </a>
                         </li>
@@ -109,7 +117,7 @@ if ($this->session->userdata('nip') == null) {
                             <a href="<?= base_url('monitoring/adduser') ?>" class="nav-link">
                                 <i class="fas fa-list"></i>
                                 <p>
-                                    Add User
+                                    Tambahkan User
                                 </p>
                             </a>
                         </li>
@@ -117,15 +125,7 @@ if ($this->session->userdata('nip') == null) {
                             <a href="<?= base_url('monitoring/location_range_list') ?>" class="nav-link">
                                 <i class="fas fa-list"></i>
                                 <p>
-                                    Location Range
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('monitoring/report') ?>" class="nav-link">
-                                <i class="fas fa-file-excel"></i>
-                                <p>
-                                    Report
+                                    Pengaturan Lokasi
                                 </p>
                             </a>
                         </li>

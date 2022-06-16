@@ -41,17 +41,24 @@ class Absensi extends REST_Controller
         $pangkat = $this->post('pangkat');
         $longitude = $this->post('longitude');
         $latitude = $this->post('latitude');
+        $jam_masuk = $this->post('jam_masuk');
+        $jam_keluar = $this->post('jam_keluar');
+        $tanggal = $this->post('tanggal');
+        
 
       
         $data = array(
             'nama' => $nama,
             'nip' => $nip,
             'pangkat' => $pangkat,
+            'jabatan' => $jabatan,
             'longitude' => $longitude,
             'latitude' => $latitude,
-            'jam' => date("h:i:sa"),
+            'jam_masuk' => $jam_masuk,
+            'jam_keluar' => $jam_keluar,
             'tanggal' => date("Y-m-d"),
         );
+        
         $insert = $this->db->insert('absensi', $data);
         if ($insert) {
             $this->response($data, 200);
@@ -60,32 +67,32 @@ class Absensi extends REST_Controller
         }
     }
 
-    function index_put()
-    {
-        $nama_relay = $this->put('nama_relay');
-        $nilai = $this->put('nilai');
+    // function index_put()
+    // {
+    //     $nama_relay = $this->put('nama_relay');
+    //     $nilai = $this->put('nilai');
 
-        if ($nilai != null){
-            if ($nilai == 1) {
-                $data['status'] = "ON";
-                $data['button'] = "succes";
-                $data['nilai'] = $nilai;
-            }else{
-                $data['status'] = "OFF";
-                $data['button'] = "danger";
-                $data['nilai'] = $nilai;
-            }
-        }
+    //     if ($nilai != null){
+    //         if ($nilai == 1) {
+    //             $data['status'] = "ON";
+    //             $data['button'] = "succes";
+    //             $data['nilai'] = $nilai;
+    //         }else{
+    //             $data['status'] = "OFF";
+    //             $data['button'] = "danger";
+    //             $data['nilai'] = $nilai;
+    //         }
+    //     }
 
-        $this->db->where('nama_relay', $nama_relay);
-        $update = $this->db->update('relay', $data);
+    //     $this->db->where('nama_relay', $nama_relay);
+    //     $update = $this->db->update('relay', $data);
 
-        if ($update) {
-            $this->response($data, 200);
-        } else {
-            $this->response(array('status' => 'fail'), 502);
-        }
-    }
+    //     if ($update) {
+    //         $this->response($data, 200);
+    //     } else {
+    //         $this->response(array('status' => 'fail'), 502);
+    //     }
+    // }
 
     function index_delete()
     {

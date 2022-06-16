@@ -14,7 +14,7 @@
     <section class="content">
         <div class="container-fluid">
 
-            <!-- <form action="monitoring" method="POST">
+            <form action="monitoring" method="POST">
                 <div class="input-group mb-3 col-lg-5">
                     <span class="input-group-text">Filter</span>
                     <input type="text" class="form-control" placeholder="NRP" aria-label="NRP" name="nip">
@@ -30,7 +30,7 @@
                     <input type="date" class="form-control" name="tanggal">
                     <button class="btn btn-outline-success" type="submit" id="button-addon2">Export Data</button>
                 </div>
-            </form> -->
+            </form>
                 
 
             <div class="row">
@@ -65,7 +65,7 @@
                                                 $status = "Belum Absen";
                                                 $tidakhadir += 1;
                                             }else{
-                                                if (strtotime($key['jam_masuk']) <= strtotime("07:00:00")) {
+                                                if (strtotime($key['jam_masuk']) < strtotime("07:00:00")) {
                                                     $status = "Sudah Absen";
                                                     $masuk += 1;
                                                 }else {
@@ -97,30 +97,8 @@
                             </div>
 
                         </div>
-                        <?= date("Y-m-d") ?>
-                        <table class="table table-secondary col-lg-2">
-                            <thead>
-                                <tr>
-                                    <th>Status</th>
-                                    <th>Jumlah</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr>
-                                    <td>Jumlah Hadir</td>
-                                    <td><?= $masuk ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Terlambat</td>
-                                    <td><?= $terlambat ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Tidak hadir</td>
-                                    <td><?= $tidakhadir ?></td>
-                                </tr>
-                            </tbody>
-                            
-                        </table>
+
+                      
                     </div>
                     
                     <!-- /.card-body -->

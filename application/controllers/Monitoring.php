@@ -24,20 +24,62 @@ class Monitoring extends CI_Controller
         if($tanggal != null){
             $this->db->where('tanggal', $tanggal);
         }
+        // else{
+        //     $this->db->where('tanggal', date("Y-m-d"));
+        // }
         
         if($tanggal != null && $nip != null){
         $this->db->limit(50);
         }
+        $this->db->distinct('nama');
 
 
         $this->db->order_by('id',"DESC");
         $data = array(
-            'absensi' => $this->db->get('absensi')
+            'absensi' => $this->db->get('user'),
+            'tanggal' => $tanggal
         );
-
+        
         $this->load->view('header/header');
         $this->load->view('v_monitoring',$data);
         $this->load->view('header/footer');
+        
+
+    }
+
+    public function riwayat()
+    {   
+        $nip = $this->input->post('nip');
+        $tanggal = $this->input->post('tanggal');
+
+        if($nip != null){
+            $this->db->where('nip', $nip);
+        }
+
+        if($tanggal != null){
+            $this->db->where('tanggal', $tanggal);
+        }
+        else{
+            $this->db->where('tanggal', date("Y-m-d"));
+        }
+        
+        if($tanggal != null && $nip != null){
+        $this->db->limit(50);
+        }
+        $this->db->distinct('nama');
+
+
+        $this->db->order_by('id',"DESC");
+        $data = array(
+            'absensi' => $this->db->get('absensi'),
+            'tanggal' => $tanggal
+        );
+        
+        $this->load->view('header/header');
+        $this->load->view('v_riwayat_absen',$data);
+        $this->load->view('header/footer');
+        
+
     }
 
 
@@ -423,6 +465,7 @@ class Monitoring extends CI_Controller
         $this->form_validation->set_rules('nip', 'nip', 'trim|required|is_unique[user.nip]');
         $this->form_validation->set_rules('password', 'password', 'trim|required');
         $this->form_validation->set_rules('pangkat', 'pangkat', 'trim|required');
+        $this->form_validation->set_rules('jabatan', 'jabatan', 'trim|required');
         $this->form_validation->set_rules('alamat', 'alamat', 'required');
         $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|is_unique[user.email]');
 
@@ -437,6 +480,7 @@ class Monitoring extends CI_Controller
                 'nip' => htmlspecialchars($this->input->post('nip',true)),
                 'password' => md5($this->input->post('password')),
                 'pangkat' => htmlspecialchars($this->input->post('pangkat',true)),
+                'jabatan' => htmlspecialchars($this->input->post('jabatan',true)),
                 'alamat' => htmlspecialchars($this->input->post('alamat',true)),
                 'email' => htmlspecialchars($this->input->post('email',true)),
                 );

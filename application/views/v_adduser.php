@@ -34,7 +34,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputEmail4">NIP</label>
+                                    <label for="inputEmail4">NRP</label>
                                     <input type="text" class="form-control" id="nip" name="nip">
                                     <?= form_error('nip','<small class="text-danger pl-3">','</small>'); ?>
                                 </div>
@@ -51,6 +51,13 @@
                                     <label for="inputEmail4">Pangkat</label>
                                     <input type="text" class="form-control" id="pangkat" name="pangkat">
                                     <?= form_error('pangkat','<small class="text-danger pl-3">','</small>'); ?>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Jabatan</label>
+                                    <input type="text" class="form-control" id="jabatan" name="jabatan">
+                                    <?= form_error('jabatan','<small class="text-danger pl-3">','</small>'); ?>
                                 </div>
                             </div>
                             <div class="form-row">

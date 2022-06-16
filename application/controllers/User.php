@@ -60,9 +60,15 @@ class user extends REST_Controller
         $nip = $this->put('nip');
         $password = $this->put('password');
         $pangkat = $this->put('pangkat');
+        $jabatan = $this->put('jabatan');
         $alamat = $this->put('alamat');
+        $longitude = $this->put('longitude');
+        $latitude = $this->put('latitude');
+        $jam_masuk = $this->put('jam_masuk');
+        $jam_keluar = $this->put('jam_keluar');
+        $tanggal = $this->put('tanggal');
 
-        if ($nama != ''){
+        if ($nama != null){
             $data['nama'] = $nama;
         }
         if ($password != null){
@@ -73,6 +79,21 @@ class user extends REST_Controller
         }
         if ($alamat != null){
             $data['alamat'] = $alamat;
+        }
+        if ($longitude != null){
+            $data['longitude'] = $longitude;
+        }
+        if ($latitude != null){
+            $data['latitude'] = $latitude;
+        }
+        if ($jam_masuk != null){
+            $data['jam_masuk'] = $jam_masuk;
+        }
+        if ($jam_keluar != null){
+            $data['jam_keluar'] = $jam_keluar;
+        }
+        if ($tanggal != null){
+            $data['tanggal'] = date("Y-m-d");
         }
 
         $this->db->where('nip', $nip);
