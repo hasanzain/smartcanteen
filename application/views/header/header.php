@@ -97,6 +97,9 @@ if ($this->session->userdata('nip') == null) {
                                 </p>
                             </a>
                         </li>
+                        <?php
+                        if ($this->session->userdata('nip') == "admin") {
+                        ?>
                         <li class="nav-item">
                             <a href="<?= base_url('monitoring/user_list') ?>" class="nav-link">
                                 <i class="fas fa-list"></i>
@@ -129,6 +132,9 @@ if ($this->session->userdata('nip') == null) {
                                 </p>
                             </a>
                         </li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
