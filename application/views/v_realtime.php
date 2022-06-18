@@ -33,7 +33,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>
-                                            <th scope="col">NIP</th>
+                                            <th scope="col">NAMA</th>
                                             <th scope="col">LOKASI</th>
                                             <th scope="col">JAM</th>
                                             <th scope="col">TANGGAL</th>
@@ -46,7 +46,7 @@
                                             ?>
                                         <tr>
                                             <th scope="row"><?= $i++ ?></th>
-                                            <td><?= $key['nip'] ?></td>
+                                            <td><?= $key['nama'] ?></td>
                                             <td><a href="https://www.google.com/maps/search/?api=1&query=<?= $key['latitude'] ?>,<?= $key['longitude'] ?>&hl=id"
                                                     target="blank">Klik Disini</a></td>
                                             <td><?= $key['jam'] ?></td>

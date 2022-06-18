@@ -209,6 +209,8 @@ class Monitoring extends CI_Controller
         if ($tanggal != null && $nip != null) {
             $this->db->limit(50);
         }
+        $this->db->order_by('id', 'DESC');
+        
         $data = array(
             'realtime' => $this->db->get('realtime')
         );

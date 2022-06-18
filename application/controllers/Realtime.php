@@ -33,12 +33,14 @@ class Realtime extends REST_Controller
     function index_post()
     {
         $nip = $this->post('nip');
+        $nama = $this->post('nama');
         $longitude = $this->post('longitude');
         $latitude = $this->post('latitude');
 
       
         $data = array(
             'nip' => $nip,
+            'nama' => $nama
             'longitude' => $longitude,
             'latitude' => $latitude,
             'jam' => date("h:i:sa"),
