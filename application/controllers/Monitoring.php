@@ -118,7 +118,7 @@ class Monitoring extends CI_Controller
         
     }
 
-     public function user_list()
+    public function user_list()
     {
         $this->db->limit(10);
         $data = array(
@@ -127,6 +127,20 @@ class Monitoring extends CI_Controller
 
         $this->load->view('header/header');
         $this->load->view('v_user_list',$data);
+        $this->load->view('header/footer');
+    }
+
+    public function update_user()
+    {
+        $id = $this->input->get('id');
+        $this->db->where('id', $id);
+        $this->db->limit(10);
+        $data = array(
+            'user' => $this->db->get('user')
+        );
+
+        $this->load->view('header/header');
+        $this->load->view('v_user_detail',$data);
         $this->load->view('header/footer');
     }
 
@@ -414,6 +428,57 @@ class Monitoring extends CI_Controller
             }else{
                 echo "error";
             }
+            
+            
+        }
+    }
+
+    public function update_user_()
+    {
+       
+        // $this->form_validation->set_rules('nama', 'nama', 'trim|required');
+        // $this->form_validation->set_rules('nip', 'nip', 'trim|required|is_unique[user.nip]');
+        // $this->form_validation->set_rules('password', 'password', 'trim|required');
+        // $this->form_validation->set_rules('pangkat', 'pangkat', 'trim|required');
+        // $this->form_validation->set_rules('jabatan', 'jabatan', 'trim|required');
+        // $this->form_validation->set_rules('alamat', 'alamat', 'required');
+        // $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|is_unique[user.email]');
+
+        
+        // if ($this->form_validation->run() == FALSE) {
+        // $this->load->view('header/header');
+        // $this->load->view('v_adduser');
+        // $this->load->view('header/footer');
+        // } else {
+            $password = $this->input->post('password');
+            $nip = $this->input->post('nip');
+            if ($password != null) {
+                $data = array(
+                    'nama' => htmlspecialchars($this->input->post('nama',true)),
+                    'password' => md5($password),
+                    'pangkat' => htmlspecialchars($this->input->post('pangkat',true)),
+                    'jabatan' => htmlspecialchars($this->input->post('jabatan',true)),
+                    'alamat' => htmlspecialchars($this->input->post('alamat',true)),
+                    'email' => htmlspecialchars($this->input->post('email',true)),
+                    );
+            }else{
+            $data = array(
+                'nama' => htmlspecialchars($this->input->post('nama',true)),
+                'pangkat' => htmlspecialchars($this->input->post('pangkat',true)),
+                'jabatan' => htmlspecialchars($this->input->post('jabatan',true)),
+                'alamat' => htmlspecialchars($this->input->post('alamat',true)),
+                'email' => htmlspecialchars($this->input->post('email',true)),
+                );
+            }
+
+            $this->db->where('nip', $nip);
+            
+            if ($this->db->update('user', $data)) {
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User berhasil diperbarui</div>');
+                redirect('monitoring/user_list');
+            // }else{
+            //     echo "error";
+            // }
             
             
         }

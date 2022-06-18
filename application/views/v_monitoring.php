@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-primary">DAFTAR ABSENSI</h1>
+                    <h1 class="m-0 text-primary">DAFTAR HADIR</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -43,15 +43,15 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Nama</th>
+                                            <th scope="col">NO</th>
+                                            <th scope="col">NAMA</th>
                                             <th scope="col">NRP</th>
                                             <th scope="col">PANGKAT</th>
                                             <th scope="col">JABATAN</th>
                                             <th scope="col">LOKASI</th>
-                                            <th scope="col">JAM Masuk</th>
-                                            <th scope="col">JAM Keluar</th>
-                                            <th scope="col">Keterangan</th>
+                                            <th scope="col">JAM MASUK</th>
+                                            <th scope="col">JAM KELUAR</th>
+                                            <th scope="col">KETERANGAN</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -65,7 +65,7 @@
                                                 $status = "Belum Absen";
                                                 $tidakhadir += 1;
                                             }else{
-                                                if (strtotime($key['jam_masuk']) <= strtotime("07:00:00")) {
+                                                if (strtotime($key['jam_masuk']) <= strtotime("07:00:01")) {
                                                     $status = "Sudah Absen";
                                                     $masuk += 1;
                                                 }else {

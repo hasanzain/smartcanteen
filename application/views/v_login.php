@@ -6,13 +6,13 @@
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <!-- <p class="login-box-msg">Sign in to start your session</p> -->
                 <?= $this->session->flashdata('message');
                  ?>
 
                 <form action="<?= base_url('auth') ?>" method="post">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="nip" id="nip" placeholder="nip"
+                        <input type="text" class="form-control" name="nip" id="nip" placeholder="NRP"
                             value="<?= set_value('nip') ?>">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -36,7 +36,7 @@
 
                         <!-- /.col -->
                         <div class="col-4">
-                            <input type="submit" class="btn btn-primary btn-block" value="Sign In">
+                            <input type="submit" class="btn btn-primary btn-block" value="Masuk">
                         </div>
                         <!-- /.col -->
                     </div>

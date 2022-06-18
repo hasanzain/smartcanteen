@@ -65,7 +65,7 @@ if ($this->session->userdata('nip') == null) {
             <a href="" class="brand-link">
                 <img src="<?= base_url('assets/') ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">ABSENSI</span>
+                <span class="brand-text font-weight-light">DAFTAR HADIR</span>
             </a>
 
             <!-- Sidebar -->
@@ -85,7 +85,7 @@ if ($this->session->userdata('nip') == null) {
                             <a href="<?= base_url('monitoring') ?>" class="nav-link">
                                 <i class="fas fa-list"></i>
                                 <p>
-                                    Absensi
+                                    Daftar Hadir
                                 </p>
                             </a>
                         </li>
@@ -93,7 +93,7 @@ if ($this->session->userdata('nip') == null) {
                             <a href="<?= base_url('monitoring/riwayat') ?>" class="nav-link">
                                 <i class="fas fa-list"></i>
                                 <p>
-                                    Riwayat Absensi
+                                    Riwayat Daftar Hadir
                                 </p>
                             </a>
                         </li>
