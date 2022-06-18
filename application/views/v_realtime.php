@@ -13,7 +13,7 @@
 
     <section class="content">
         <div class="container-fluid">
-            <form action="monitoring" method="POST">
+            <form action="<?= base_url('monitoring/realtime') ?>" method="POST">
                 <div class="input-group mb-3 col-lg-5">
                     <span class="input-group-text">Filter</span>
                     <input type="text" class="form-control" placeholder="NRP" aria-label="NRP" name="nip">

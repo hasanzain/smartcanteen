@@ -14,7 +14,7 @@
     <section class="content">
         <div class="container-fluid">
 
-            <form action="monitoring" method="POST">
+            <form action="<?= base_url('monitoring/riwayat') ?>" method="POST">
                 <div class="input-group mb-3 col-lg-5">
                     <span class="input-group-text">Filter</span>
                     <input type="text" class="form-control" placeholder="NRP" aria-label="NRP" name="nip">
@@ -23,7 +23,7 @@
                 </div>
             </form>
 
-            <form action="monitoring/export_csv" method="POST">
+            <form action="<?= base_url('monitoring/export_csv') ?>" method="POST">
                 <div class="input-group mb-3 col-lg-5">
                     <span class="input-group-text">Filter</span>
                     <input type="text" class="form-control" placeholder="NRP" aria-label="NRP" name="nip">
@@ -51,6 +51,7 @@
                                             <th scope="col">LOKASI</th>
                                             <th scope="col">JAM Masuk</th>
                                             <th scope="col">JAM Keluar</th>
+                                            <th scope="col">TANGGAL</th>
                                             <th scope="col">Keterangan</th>
                                         </tr>
                                     </thead>
@@ -85,6 +86,7 @@
                                                     target="blank">Klik Disini</a></td>
                                             <td><?= $key['jam_masuk'] ?></td>
                                             <td><?= $key['jam_keluar'] ?></td>
+                                            <td><?= $key['tanggal'] ?></td>
                                             <td><?= $status ?></td>
                                             </a>
                                         </tr>

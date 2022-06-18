@@ -188,6 +188,9 @@ class Monitoring extends CI_Controller
         if($tanggal != null){
             $this->db->where('tanggal', $tanggal);
         }
+        else{
+            $this->db->where('tanggal', date("Y-m-d"));
+        }
         
         if ($tanggal != null && $nip != null) {
             $this->db->limit(50);
@@ -201,86 +204,7 @@ class Monitoring extends CI_Controller
         $this->load->view('header/footer');
     }
 
-    public function tes()
-    {
-        $this->load->view('v_tes');
-        
-    }
-
-    public function detail()
-    {
-         $data = array(
-            'relay' => $this->db->get('relay')
-        );
-        $this->load->view('header/header');
-        $this->load->view('v_detail',$data);
-        $this->load->view('header/footer');
-    }
-
-    public function relay()
-    {
-
-        $data = array(
-            'relay' => $this->db->get('relay')
-        );
-        $this->load->view('header/header');
-        $this->load->view('v_relay', $data);
-        $this->load->view('header/footer');
-   
-        
-    }
-
-    public function reset_kwh()
-    {
-        $request = 0;
-        $update = 0;
-        $this->db->where('id', '1');
-        $data = $this->db->get('reset_kwh');
-        foreach ($data -> result_array() as $key) {
-            $request = $key['value'];
-        }
-        if ($request == '1') {
-            $update=0;
-        }else{
-            $update=1;
-        }
-        $baru = array(
-            'value' => $update
-        );
-        $this->db->where('id', '1');
-        $this->db->update('reset_kwh', $baru);
-        redirect('detail?name=panel_1');
-        
-        
-    }
-
-    public function update_relay()
-    {
-        $id = $this->input->get('id');
-        $nilai = $this->input->get('nilai');
-        
-        if ($nilai == 1) {
-            $nilaibaru = 0;
-            $button = 'danger';
-            $status = 'OFF';
-        }else{
-            $nilaibaru = 1;
-            $button = 'success';
-            $status = 'ON';
-        }
-        $object = array(
-            'button' => $button,
-            'status' => $status,
-            'nilai' => $nilaibaru
-         );
-
-        $this->db->where('id', $id);
-        $this->db->update('relay', $object);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Lokasi Berhasil Diperbarui</div>');
-        redirect('monitoring/detail');
-        
-        
-    }
+    
 
     public function chart()
     {
