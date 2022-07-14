@@ -1,5 +1,5 @@
 ###################
-Website Absen GPS
+SMART DOOR
 ###################
 
-    dikembangkan untuk kebutuhan projek absen menggunakan gps dan waktu
+    dikembangkan untuk kebutuhan projek monitoring akses laboratorium
