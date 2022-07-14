@@ -45,14 +45,7 @@
                                         <tr>
                                             <th scope="col">NO</th>
                                             <th scope="col">NAMA</th>
-                                            <th scope="col">NRP</th>
-                                            <th scope="col">PANGKAT</th>
-                                            <th scope="col">JABATAN</th>
-                                            <th scope="col">LOKASI</th>
-                                            <th scope="col">JAM MASUK</th>
-                                            <th scope="col">JAM KELUAR</th>
-                                            <th scope="col">KETERANGAN</th>
-                                        </tr>
+                                            <th scope="col">PANGKAT</th>                                        </tr>
                                     </thead>
                                     <tbody>
                                         <?php
@@ -61,32 +54,12 @@
                                         $terlambat = 0;
                                         $tidakhadir = 0;
                                         foreach ($absensi->result_array() as $key) {
-                                            if(strtotime($key['tanggal']) != strtotime(date("Y-m-d"))){
-                                                $status = "Belum Absen";
-                                                $tidakhadir += 1;
-                                            }else{
-                                                if (strtotime($key['jam_masuk']) <= strtotime("07:00:01")) {
-                                                    $status = "Sudah Absen";
-                                                    $masuk += 1;
-                                                }else {
-                                                    $status = "Terlambat";
-                                                    $terlambat += 1;
-                                                }
-                                            }
                                             
                                             ?>
                                         <tr>
                                             <th scope="row"><?= $i++ ?></th>
                                             <td><?= $key['nama'] ?></td>
-                                            <td><?= $key['nip'] ?></td>
                                             <td><?= $key['pangkat'] ?></td>
-                                            <td><?= $key['jabatan'] ?></td>
-                                            <td><a href="https://www.google.com/maps/search/?api=1&query=<?= $key['latitude'] ?>,<?= $key['longitude'] ?>&hl=id"
-                                                    target="blank">Klik Disini</a></td>
-                                            <td><?= $key['jam_masuk'] ?></td>
-                                            <td><?= $key['jam_keluar'] ?></td>
-                                            <td><?= $status ?></td>
-                                            </a>
                                         </tr>
                                         <?php
                                         }
@@ -97,30 +70,6 @@
                             </div>
 
                         </div>
-                        <?= date("Y-m-d") ?>
-                        <table class="table table-secondary col-lg-2">
-                            <thead>
-                                <tr>
-                                    <th>Status</th>
-                                    <th>Jumlah</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr>
-                                    <td>Jumlah Hadir</td>
-                                    <td><?= $masuk ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Terlambat</td>
-                                    <td><?= $terlambat ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Tidak hadir</td>
-                                    <td><?= $tidakhadir ?></td>
-                                </tr>
-                            </tbody>
-                            
-                        </table>
                     </div>
                     
                     <!-- /.card-body -->

@@ -6,7 +6,7 @@ class Auth extends CI_Controller {
 
     public function index()
     {
-        $this->form_validation->set_rules('nip', 'nip', 'trim|required');
+        $this->form_validation->set_rules('username', 'username', 'trim|required');
         $this->form_validation->set_rules('password', 'password', 'trim|required');
         
         
@@ -24,15 +24,15 @@ class Auth extends CI_Controller {
     private function _login()
     {
 
-        $nip = $this->input->post('nip');
+        $username = $this->input->post('username');
         $password = $this->input->post('password');
-        $this->db->where('nip', $nip);
+        $this->db->where('username', $username);
         $this->db->where('password', md5($password));
-        $q = $this->db->get('user');
+        $q = $this->db->get('admin');
         $user = $q ->row_array();
         if($q->num_rows() == 1){
             $data = array(
-                   'nip' => $user['nip'],
+                   'username' => $user['username'],
                  );
                  
                  $this->session->set_userdata( $data);
@@ -70,7 +70,7 @@ class Auth extends CI_Controller {
     public function logout()
     {
         
-        $this->session->unset_userdata('nip');
+        $this->session->unset_userdata('username');
         redirect('monitoring');
         
     }

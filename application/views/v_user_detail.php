@@ -31,49 +31,24 @@
                         <form action="<?= base_url('monitoring/update_user_') ?>" method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Nama</label>
+                                    <label for="inputEmail4">NAMA</label>
                                     <input type="text" class="form-control" id="nama" name="nama" value=<?= $key['nama'] ?>>
-                                    <input type="text" class="form-control" id="nip" name="nip" value=<?= $key['nip'] ?> hidden>
+                                    <input type="text" class="form-control" id="id" name="id" value=<?= $key['id'] ?> hidden>
                                     <?= form_error('nama','<small class="text-danger pl-3">','</small>'); ?>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputPassword4">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Biarkan kosong jika tidak ingin diperbarui">
-                                    <?= form_error('password','<small class="text-danger pl-3">','</small>'); ?>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Pangkat</label>
+                                    <label for="inputEmail4">PANGKAT</label>
                                     <input type="text" class="form-control" id="pangkat" name="pangkat" value=<?= $key['pangkat'] ?>>
                                     <?= form_error('pangkat','<small class="text-danger pl-3">','</small>'); ?>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Jabatan</label>
-                                    <input type="text" class="form-control" id="jabatan" name="jabatan" value=<?= $key['jabatan'] ?>>
-                                    <?= form_error('jabatan','<small class="text-danger pl-3">','</small>'); ?>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <div class="form-floating">
-                                        <label for="alamat">Alamat</label>
-                                        <textarea class="form-control" placeholder="Alamat" id="alamat" name="alamat"
-                                            style="height: 100px" ><?= $key['alamat'] ?></textarea>
-                                    </div>
-                                    <?= form_error('alamat','<small class="text-danger pl-3">','</small>'); ?>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputCity">Email</label>
-                                    <input type="text" class="form-control" id="email" name="email" value=<?= $key['email'] ?>>
-                                    <?= form_error('email','<small class="text-danger pl-3">','</small>'); ?>
+                                    <label for="inputEmail4">ID SIDIK JARI</label>
+                                    <input type="text" class="form-control" id="fingerID" name="fingerID" value=<?= $key['finger_location'] ?>>
+                                    <?= form_error('fingerID','<small class="text-danger pl-3">','</small>'); ?>
                                 </div>
                             </div>
                             <input type="submit" value="Perbarui" class="btn btn-primary">

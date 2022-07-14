@@ -27,25 +27,19 @@
                                         <tr>
                                             <th scope="col">No</th>
                                             <th scope="col">Nama</th>
-                                            <th scope="col">NRP</th>
                                             <th scope="col">PANGKAT</th>
-                                            <th scope="col">JABATAN</th>
-                                            <th scope="col">EMAIL</th>
                                             <th scope="col">#</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $i=0;
+                                        $i=1;
                                         foreach ($user->result_array() as $key) {
                                             ?>
                                         <tr>
                                             <th scope="row"><?= $i++ ?></th>
                                             <td><?= $key['nama'] ?></td>
-                                            <td><?= $key['nip'] ?></td>
                                             <td><?= $key['pangkat'] ?></td>
-                                            <td><?= $key['jabatan'] ?></td>
-                                            <td><?= $key['email'] ?></td>
                                             <td>
                                                 <a href="<?= base_url('monitoring/update_user?id=').$key['id'] ?>">
                                                     <button type="button" class="btn btn-success">Detail</button>

@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+date_default_timezone_set("Asia/Jakarta");
 
 class Monitoring extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('nip')=='') {
+        if ($this->session->userdata('username')=='') {
             redirect('auth');
         }
         
@@ -14,11 +15,11 @@ class Monitoring extends CI_Controller
 
     public function index()
     {   
-        $nip = $this->input->post('nip');
+        $nama = $this->input->post('nama');
         $tanggal = $this->input->post('tanggal');
 
-        if($nip != null){
-            $this->db->where('nip', $nip);
+        if($nama != null){
+            $this->db->where('nama', $nama);
         }
 
         if($tanggal != null){
@@ -28,7 +29,7 @@ class Monitoring extends CI_Controller
         //     $this->db->where('tanggal', date("Y-m-d"));
         // }
         
-        if($tanggal != null && $nip != null){
+        if($tanggal != null && $nama != null){
         $this->db->limit(50);
         }
         $this->db->distinct('nama');
@@ -36,7 +37,7 @@ class Monitoring extends CI_Controller
 
         $this->db->order_by('id',"DESC");
         $data = array(
-            'absensi' => $this->db->get('user'),
+            'absensi' => $this->db->get('login_record'),
             'tanggal' => $tanggal
         );
         
@@ -49,11 +50,11 @@ class Monitoring extends CI_Controller
 
     public function riwayat()
     {   
-        $nip = $this->input->post('nip');
+        $nama = $this->input->post('nama');
         $tanggal = $this->input->post('tanggal');
 
-        if($nip != null){
-            $this->db->where('nip', $nip);
+        if($nama != null){
+            $this->db->where('nama', $nama);
         }
 
         if($tanggal != null){
@@ -63,7 +64,7 @@ class Monitoring extends CI_Controller
             $this->db->where('tanggal', date("Y-m-d"));
         }
         
-        if($tanggal != null && $nip != null){
+        if($tanggal != null && $nama != null){
         $this->db->limit(50);
         }
         $this->db->distinct('nama');
@@ -71,7 +72,7 @@ class Monitoring extends CI_Controller
 
         $this->db->order_by('id',"DESC");
         $data = array(
-            'absensi' => $this->db->get('absensi'),
+            'absensi' => $this->db->get('login_record'),
             'tanggal' => $tanggal
         );
         
@@ -85,29 +86,29 @@ class Monitoring extends CI_Controller
 
     public function export_csv()
     {
-        $nip = $this->input->post('nip');
+        $nama = $this->input->post('nama');
         $tanggal = $this->input->post('tanggal');
 
-        if($nip != null){
-            $this->db->where('nip', $nip);
+        if($nama != null){
+            $this->db->where('nama', $nama);
         }
 
         if($tanggal != null){
             $this->db->where('tanggal', $tanggal);
         }
 
-        $file_name = 'daftarabsensi_'.date('Ymd').'.csv'; 
+        $file_name = 'Riwayat Akses_'.date('Ymd').'.csv'; 
         header("Content-Description: File Transfer"); 
         header("Content-Disposition: attachment; filename=$file_name"); 
         header("Content-Type: application/csv;");
     
         // get data 
-        $data = $this->db->get('absensi');
+        $data = $this->db->get('login_record');
 
         // file creation 
         $file = fopen('php://output', 'w');
     
-        $header = array("id","Nama","NIP","Pangkat","Lokasi","Jam","Tanggal"); 
+        $header = array("No","Nama","Pangkat","Foto Masuk","Tanggal"); 
         fputcsv($file, $header);
         foreach ($data->result_array() as $key => $value)
         { 
@@ -122,7 +123,7 @@ class Monitoring extends CI_Controller
     {
         $this->db->limit(10);
         $data = array(
-            'user' => $this->db->get('user')
+            'user' => $this->db->get('user_fingerprint')
         );
 
         $this->load->view('header/header');
@@ -136,7 +137,7 @@ class Monitoring extends CI_Controller
         $this->db->where('id', $id);
         $this->db->limit(10);
         $data = array(
-            'user' => $this->db->get('user')
+            'user' => $this->db->get('user_fingerprint')
         );
 
         $this->load->view('header/header');
@@ -192,11 +193,11 @@ class Monitoring extends CI_Controller
 
     public function realtime()
     {   
-        $nip = $this->input->post('nip');
+        $nama = $this->input->post('nama');
         $tanggal = $this->input->post('tanggal');
 
-        if($nip != null){
-            $this->db->where('nip', $nip);
+        if($nama != null){
+            $this->db->where('nama', $nama);
         }
 
         if($tanggal != null){
@@ -206,8 +207,10 @@ class Monitoring extends CI_Controller
             $this->db->where('tanggal', date("Y-m-d"));
         }
         
-        if ($tanggal != null && $nip != null) {
+        if ($tanggal != null && $nama != null) {
             $this->db->limit(50);
+        }else{
+            $this->db->limit(100);
         }
         $this->db->order_by('id', 'DESC');
         
@@ -402,13 +405,8 @@ class Monitoring extends CI_Controller
     {
        
         $this->form_validation->set_rules('nama', 'nama', 'trim|required');
-        $this->form_validation->set_rules('nip', 'nip', 'trim|required|is_unique[user.nip]');
-        $this->form_validation->set_rules('password', 'password', 'trim|required');
         $this->form_validation->set_rules('pangkat', 'pangkat', 'trim|required');
-        $this->form_validation->set_rules('jabatan', 'jabatan', 'trim|required');
-        $this->form_validation->set_rules('alamat', 'alamat', 'required');
-        $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|is_unique[user.email]');
-
+        $this->form_validation->set_rules('fingerID', 'fingerID', 'trim|required|numeric');
         
         if ($this->form_validation->run() == FALSE) {
         $this->load->view('header/header');
@@ -417,14 +415,10 @@ class Monitoring extends CI_Controller
         } else {
             $data = array(
                 'nama' => htmlspecialchars($this->input->post('nama',true)),
-                'nip' => htmlspecialchars($this->input->post('nip',true)),
-                'password' => md5($this->input->post('password')),
                 'pangkat' => htmlspecialchars($this->input->post('pangkat',true)),
-                'jabatan' => htmlspecialchars($this->input->post('jabatan',true)),
-                'alamat' => htmlspecialchars($this->input->post('alamat',true)),
-                'email' => htmlspecialchars($this->input->post('email',true)),
+                'finger_location' => htmlspecialchars($this->input->post('fingerID',true)),
                 );
-            if ($this->db->insert('user', $data)) {
+            if ($this->db->insert('user_fingerprint', $data)) {
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User berhasil ditambahkan</div>');
                 redirect('monitoring/adduser');
             }else{
@@ -437,53 +431,23 @@ class Monitoring extends CI_Controller
 
     public function update_user_()
     {
-       
-        // $this->form_validation->set_rules('nama', 'nama', 'trim|required');
-        // $this->form_validation->set_rules('nip', 'nip', 'trim|required|is_unique[user.nip]');
-        // $this->form_validation->set_rules('password', 'password', 'trim|required');
-        // $this->form_validation->set_rules('pangkat', 'pangkat', 'trim|required');
-        // $this->form_validation->set_rules('jabatan', 'jabatan', 'trim|required');
-        // $this->form_validation->set_rules('alamat', 'alamat', 'required');
-        // $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|is_unique[user.email]');
-
+        $id = $this->input->post('id');
+        $data = array(
+            'nama' => htmlspecialchars($this->input->post('nama')),
+            'pangkat' => htmlspecialchars($this->input->post('pangkat')),
+            'finger_location' => htmlspecialchars($this->input->post('fingerID'))
+        );
         
-        // if ($this->form_validation->run() == FALSE) {
-        // $this->load->view('header/header');
-        // $this->load->view('v_adduser');
-        // $this->load->view('header/footer');
-        // } else {
-            $password = $this->input->post('password');
-            $nip = $this->input->post('nip');
-            if ($password != null) {
-                $data = array(
-                    'nama' => htmlspecialchars($this->input->post('nama',true)),
-                    'password' => md5($password),
-                    'pangkat' => htmlspecialchars($this->input->post('pangkat',true)),
-                    'jabatan' => htmlspecialchars($this->input->post('jabatan',true)),
-                    'alamat' => htmlspecialchars($this->input->post('alamat',true)),
-                    'email' => htmlspecialchars($this->input->post('email',true)),
-                    );
-            }else{
-            $data = array(
-                'nama' => htmlspecialchars($this->input->post('nama',true)),
-                'pangkat' => htmlspecialchars($this->input->post('pangkat',true)),
-                'jabatan' => htmlspecialchars($this->input->post('jabatan',true)),
-                'alamat' => htmlspecialchars($this->input->post('alamat',true)),
-                'email' => htmlspecialchars($this->input->post('email',true)),
-                );
-            }
-
-            $this->db->where('nip', $nip);
-            
-            if ($this->db->update('user', $data)) {
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User berhasil diperbarui</div>');
-                redirect('monitoring/user_list');
-            // }else{
-            //     echo "error";
-            // }
-            
-            
+        $this->db->where('id', $id);
+        
+        if ($this->db->update('user_fingerprint', $data)) {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User berhasil diperbarui</div>');
+            redirect('monitoring/user_list');
+        }else{
+            echo "error";
         }
+            
+        
     }
 
     public function delete_user( $id = NULL )
@@ -491,7 +455,7 @@ class Monitoring extends CI_Controller
         $id = $this->input->get('id');
         $this->db->where('id', $id);
         
-        if ($this->db->delete('user')) {
+        if ($this->db->delete('user_fingerprint')) {
             // $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil dihapus</div>');
             redirect('monitoring/user_list');
         }else{

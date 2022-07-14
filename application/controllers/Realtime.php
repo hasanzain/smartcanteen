@@ -40,7 +40,7 @@ class Realtime extends REST_Controller
       
         $data = array(
             'nip' => $nip,
-            'nama' => $nama
+            'nama' => $nama,
             'longitude' => $longitude,
             'latitude' => $latitude,
             'jam' => date("h:i:sa"),

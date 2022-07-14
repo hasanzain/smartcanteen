@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>ABSENSI</title>
+    <title>SMART DOOR</title>
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="<?= base_url('assets/') ?>fontawesome/css/all.min.css">
@@ -38,7 +38,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item d-none d-sm-inline-block">
                     <?php
-if ($this->session->userdata('nip') == null) {
+if ($this->session->userdata('username') == null) {
     
                     ?>
                     <a href="<?= base_url('auth') ?>" class="nav-link"><button type="button"
@@ -65,7 +65,7 @@ if ($this->session->userdata('nip') == null) {
             <a href="" class="brand-link">
                 <img src="<?= base_url('assets/') ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">DAFTAR HADIR</span>
+                <span class="brand-text font-weight-light">SMART DOOR</span>
             </a>
 
             <!-- Sidebar -->
@@ -80,25 +80,16 @@ if ($this->session->userdata('nip') == null) {
                with font-awesome or any other icon font library -->
                         <li class="nav-item has-treeview menu-open">
                         </li>
-
-                        <li class="nav-item">
-                            <a href="<?= base_url('monitoring') ?>" class="nav-link">
-                                <i class="fas fa-list"></i>
-                                <p>
-                                    Daftar Hadir
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a href="<?= base_url('monitoring/riwayat') ?>" class="nav-link">
                                 <i class="fas fa-list"></i>
                                 <p>
-                                    Riwayat Daftar Hadir
+                                    Riwayat Akses
                                 </p>
                             </a>
                         </li>
                         <?php
-                        if ($this->session->userdata('nip') == "admin") {
+                        if ($this->session->userdata('username') == "admin") {
                         ?>
                         <li class="nav-item">
                             <a href="<?= base_url('monitoring/user_list') ?>" class="nav-link">
@@ -109,26 +100,10 @@ if ($this->session->userdata('nip') == null) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= base_url('monitoring/realtime') ?>" class="nav-link">
-                                <i class="fas fa-list"></i>
-                                <p>
-                                    Lokasi Terakhir
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="<?= base_url('monitoring/adduser') ?>" class="nav-link">
                                 <i class="fas fa-list"></i>
                                 <p>
                                     Tambahkan User
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?= base_url('monitoring/location_range_list') ?>" class="nav-link">
-                                <i class="fas fa-list"></i>
-                                <p>
-                                    Pengaturan Lokasi
                                 </p>
                             </a>
                         </li>

@@ -88,6 +88,7 @@ class user extends REST_Controller
         }
         if ($jam_masuk != null){
             $data['jam_masuk'] = $jam_masuk;
+            $data['jam_keluar'] = "00:00:00";
         }
         if ($jam_keluar != null){
             $data['jam_keluar'] = $jam_keluar;
