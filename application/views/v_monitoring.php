@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-primary">DAFTAR HADIR</h1>
+                    <h1 class="m-0 text-primary">RIWAYAT MAKAN</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -14,16 +14,18 @@
     <section class="content">
         <div class="container-fluid">
 
-            <!-- <form action="monitoring" method="POST">
-                <div class="input-group mb-3 col-lg-5">
+            <form action="monitoring" method="POST">
+                <div class="input-group mb-3 col-lg-6">
                     <span class="input-group-text">Filter</span>
-                    <input type="text" class="form-control" placeholder="NRP" aria-label="NRP" name="nip">
+                    <input type="text" class="form-control" placeholder="ID Karyawan" aria-label="NRP" name="idKaryawan">
+                    <input type="text" class="form-control" placeholder="Nama" aria-label="NRP" name="nama">
+                    <input type="text" class="form-control" placeholder="Waktu Makan" aria-label="NRP" name="keterangan">
                     <input type="date" class="form-control" name="tanggal">
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Cari</button>
                 </div>
             </form>
 
-            <form action="monitoring/export_csv" method="POST">
+            <!-- <form action="monitoring/export_csv" method="POST">
                 <div class="input-group mb-3 col-lg-5">
                     <span class="input-group-text">Filter</span>
                     <input type="text" class="form-control" placeholder="NRP" aria-label="NRP" name="nip">
@@ -45,7 +47,10 @@
                                         <tr>
                                             <th scope="col">NO</th>
                                             <th scope="col">NAMA</th>
-                                            <th scope="col">PANGKAT</th>                                        </tr>
+                                            <th scope="col">TANGGAL</th>
+                                            <th scope="col">JAM</th>
+                                            <th scope="col">KET</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <?php
@@ -53,13 +58,15 @@
                                         $masuk = 0;
                                         $terlambat = 0;
                                         $tidakhadir = 0;
-                                        foreach ($absensi->result_array() as $key) {
+                                        foreach ($riwayat_makan->result_array() as $key) {
                                             
                                             ?>
                                         <tr>
                                             <th scope="row"><?= $i++ ?></th>
                                             <td><?= $key['nama'] ?></td>
-                                            <td><?= $key['pangkat'] ?></td>
+                                            <td><?= $key['tanggal'] ?></td>
+                                            <td><?= $key['jam'] ?></td>
+                                            <td><?= $key['keterangan'] ?></td>
                                         </tr>
                                         <?php
                                         }

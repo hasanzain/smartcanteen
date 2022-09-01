@@ -59,7 +59,7 @@
                                             <th scope="row"><?= $i++ ?></th>
                                             <td><?= $key['nama'] ?></td>
                                             <td><?= $key['pangkat'] ?></td>
-                                            <td><a href="<?= $key['foto_masuk'] ?>" target="_blank">Klik Disini!</a></td>
+                                            <td><a href="<?= base_url('monitoring/viewImage?lokasi=').$key['foto_masuk'] ?>">klik Disini</a></td>
                                         </tr>
                                         <?php
                                         }
