@@ -81,10 +81,11 @@ class AbsenMakan extends REST_Controller
                     'keterangan' => $keterangan,
                 );
 
-                $this->db->insert('riwayat_makan', $data);
-
-
-                $this->response(array('Status' => 'SILAHKAN AMBIL'), 200);
+                if ($this->db->insert('riwayat_makan', $data)) {
+                    $this->response(array('Status' => 'SILAHKAN AMBIL'), 200);
+                } else {
+                    $this->response(array('Status' => 'Data Gagal Dimasukan'), 200);
+                }
             } else {
                 $this->response(array('Status' => 'AKUN ANDA TERKUNCI'), 200);
             }
