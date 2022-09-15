@@ -106,33 +106,42 @@ class AbsenMakan extends REST_Controller
         // $jam = 7;
         // $menit = 59;
 
+        $this->db->where('id_karyawan', $id);
+        $karyawan = $this->db->get('karyawan');
 
-        if ($jam >= $this->getTime("jam", "pagi") && $jam < $this->getTime("jam", "siang")) {
-            if ($menit >= $this->getTime("menit", "pagi")) {
-                if ($this->cekMakan($id, "<", 1)) {
-                    $this->ambilMakan($id, "pagi");
-                } else {
-                    $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
+        if ($karyawan) {
+
+
+
+            if ($jam >= $this->getTime("jam", "pagi") && $jam < $this->getTime("jam", "siang")) {
+                if ($menit >= $this->getTime("menit", "pagi")) {
+                    if ($this->cekMakan($id, "<", 1)) {
+                        $this->ambilMakan($id, "pagi");
+                    } else {
+                        $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
+                    }
                 }
-            }
-        } elseif ($jam >= $this->getTime("jam", "siang") && $jam < $this->getTime("jam", "sore")) {
-            if ($menit >= $this->getTime("menit", "siang")) {
-                if ($this->cekMakan($id, "<=", 2)) {
-                    $this->ambilMakan($id, "siang");
-                } else {
-                    $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
+            } elseif ($jam >= $this->getTime("jam", "siang") && $jam < $this->getTime("jam", "sore")) {
+                if ($menit >= $this->getTime("menit", "siang")) {
+                    if ($this->cekMakan($id, "<=", 2)) {
+                        $this->ambilMakan($id, "siang");
+                    } else {
+                        $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
+                    }
                 }
-            }
-        } elseif ($jam >= $this->getTime("jam", "sore") && $jam < 21) {
-            if ($menit >= $this->getTime("menit", "sore")) {
-                if ($this->cekMakan($id, "<", 3)) {
-                    $this->ambilMakan($id, "sore");
-                } else {
-                    $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
+            } elseif ($jam >= $this->getTime("jam", "sore") && $jam < 21) {
+                if ($menit >= $this->getTime("menit", "sore")) {
+                    if ($this->cekMakan($id, "<", 3)) {
+                        $this->ambilMakan($id, "sore");
+                    } else {
+                        $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
+                    }
                 }
+            } else {
+                $this->response(array('Status' => 'DILUAR WAKTU!'), 200);
             }
         } else {
-            $this->response(array('Status' => 'DILUAR WAKTU!'), 200);
+            $this->response(array('Status' => 'TIDAK TERDAFTAR!'), 200);
         }
     }
 
