@@ -84,13 +84,13 @@ class AbsenMakan extends REST_Controller
                 if ($this->db->insert('riwayat_makan', $data)) {
                     $this->response(array('Status' => 'SILAHKAN AMBIL'), 200);
                 } else {
-                    $this->response(array('Status' => 'Data Gagal Dimasukan'), 200);
+                    $this->response(array('Status' => 'Error: 502DB'), 200);
                 }
             } else {
-                $this->response(array('Status' => 'AKUN ANDA TERKUNCI'), 200);
+                $this->response(array('Status' => 'AKUN TERKUNCI'), 200);
             }
         } else {
-            $this->response(array('Status' => 'KARYAWAN TIDAK TERDAFTAR'), 200);
+            $this->response(array('Status' => 'TIDAK TERDAFTAR'), 200);
         }
     }
 
@@ -128,11 +128,11 @@ class AbsenMakan extends REST_Controller
                 if ($this->cekMakan(12345678, "<", 3)) {
                     $this->ambilMakan($id, "sore");
                 } else {
-                    $this->response(array('Status' => 'SUDAH MAKAN!'), 502);
+                    $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
                 }
             }
         } else {
-            $this->response(array('Status' => 'DILUAR JAM MAKAN!'), 502);
+            $this->response(array('Status' => 'DILUAR WAKTU!'), 200);
         }
     }
 
