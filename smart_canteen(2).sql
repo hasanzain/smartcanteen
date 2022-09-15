@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2022 at 03:04 AM
+-- Generation Time: Sep 15, 2022 at 02:27 PM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.28
+-- PHP Version: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,6 +43,30 @@ INSERT INTO `admin` (`id`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `departemen`
+--
+
+CREATE TABLE `departemen` (
+  `departemen_id` int(11) NOT NULL,
+  `nama` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `departemen`
+--
+
+INSERT INTO `departemen` (`departemen_id`, `nama`) VALUES
+(1, 'OPR'),
+(2, 'PRO'),
+(3, 'ENG'),
+(4, 'PLT'),
+(5, 'SCM'),
+(6, 'HSE'),
+(7, 'GEA');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jam_makan`
 --
 
@@ -69,8 +93,10 @@ INSERT INTO `jam_makan` (`id`, `keterangan`, `jam`) VALUES
 
 CREATE TABLE `karyawan` (
   `id` int(11) NOT NULL,
+  `nrp` int(11) NOT NULL,
   `id_karyawan` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
+  `departemen_id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `status` varchar(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -79,8 +105,10 @@ CREATE TABLE `karyawan` (
 -- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id`, `id_karyawan`, `nama`, `email`, `status`) VALUES
-(1, '12345678', 'karyawan 2', 'mail@mail.com', '1');
+INSERT INTO `karyawan` (`id`, `nrp`, `id_karyawan`, `nama`, `departemen_id`, `email`, `status`) VALUES
+(1, 0, '12345678', 'karyawan 2', 0, 'mail@mail.com', '1'),
+(3, 0, '123', 'Hasan', 1, 'asadas', '1'),
+(5, 0, 'ads', 'asd', 1, 'asd', '1');
 
 -- --------------------------------------------------------
 
@@ -104,7 +132,8 @@ CREATE TABLE `riwayat_makan` (
 INSERT INTO `riwayat_makan` (`id`, `id_karyawan`, `nama`, `tanggal`, `jam`, `keterangan`) VALUES
 (11, '12345678', 'karyawan 2', '2022-08-28', '19:08:38', ''),
 (12, '12345678', 'karyawan 2', '2022-08-28', '19:14:35', ''),
-(13, '12345678', 'karyawan 2', '2022-08-28', '19:17:19', '');
+(13, '12345678', 'karyawan 2', '2022-08-28', '19:17:19', ''),
+(14, '12345678', 'karyawan 2', '2022-09-11', '12:33:23', 'pagi');
 
 --
 -- Indexes for dumped tables
@@ -115,6 +144,13 @@ INSERT INTO `riwayat_makan` (`id`, `id_karyawan`, `nama`, `tanggal`, `jam`, `ket
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `departemen`
+--
+ALTER TABLE `departemen`
+  ADD PRIMARY KEY (`departemen_id`),
+  ADD KEY `departemen_id` (`departemen_id`);
 
 --
 -- Indexes for table `jam_makan`
@@ -129,7 +165,8 @@ ALTER TABLE `jam_makan`
 --
 ALTER TABLE `karyawan`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_karyawan` (`id_karyawan`);
+  ADD UNIQUE KEY `id_karyawan` (`id_karyawan`),
+  ADD KEY `departemen_id` (`departemen_id`);
 
 --
 -- Indexes for table `riwayat_makan`
@@ -158,13 +195,13 @@ ALTER TABLE `jam_makan`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `riwayat_makan`
 --
 ALTER TABLE `riwayat_makan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
