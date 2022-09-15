@@ -244,23 +244,34 @@ class Monitoring extends CI_Controller
     public function addKaryawan()
     {
 
+        $this->form_validation->set_rules('nrp', 'nrp', 'trim|required|numeric');
         $this->form_validation->set_rules('nama', 'nama', 'trim|required');
-        $this->form_validation->set_rules('pangkat', 'pangkat', 'trim|required');
-        $this->form_validation->set_rules('fingerID', 'fingerID', 'trim|required|numeric');
+        $this->form_validation->set_rules('idkartu', 'idkartu', 'trim|required');
+        $this->form_validation->set_rules('departemen', 'departemen', 'trim|required');
+        $this->form_validation->set_rules('status', 'status', 'trim|required');
+
+        $data = [
+            'departemen' =>
+            $this->db->get('departemen'),
+        ];
+
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('header/header');
-            $this->load->view('v_addKaryawan');
+            $this->load->view('v_addKaryawan', $data);
             $this->load->view('header/footer');
         } else {
             $data = array(
+                'nrp' => htmlspecialchars($this->input->post('nama', true)),
                 'nama' => htmlspecialchars($this->input->post('nama', true)),
-                'pangkat' => htmlspecialchars($this->input->post('pangkat', true)),
-                'finger_location' => htmlspecialchars($this->input->post('fingerID', true)),
+                'id_karyawan' => htmlspecialchars($this->input->post('idkartu', true)),
+                'departemen_id' => htmlspecialchars($this->input->post('departemen', true)),
+                'email' => $this->input->post('email'),
+                'status' => htmlspecialchars($this->input->post('status', true)),
             );
-            if ($this->db->insert('user_fingerprint', $data)) {
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">User berhasil ditambahkan</div>');
-                redirect('monitoring/adduser');
+            if ($this->db->insert('karyawan', $data)) {
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Karyawan berhasil ditambahkan</div>');
+                redirect('monitoring/addKaryawan');
             } else {
                 echo "error";
             }
