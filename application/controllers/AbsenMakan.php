@@ -109,7 +109,7 @@ class AbsenMakan extends REST_Controller
 
         if ($jam >= $this->getTime("jam", "pagi") && $jam < $this->getTime("jam", "siang")) {
             if ($menit >= $this->getTime("menit", "pagi")) {
-                if ($this->cekMakan(12345678, "<", 1)) {
+                if ($this->cekMakan($id, "<", 1)) {
                     $this->ambilMakan($id, "pagi");
                 } else {
                     $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
@@ -117,15 +117,15 @@ class AbsenMakan extends REST_Controller
             }
         } elseif ($jam >= $this->getTime("jam", "siang") && $jam < $this->getTime("jam", "sore")) {
             if ($menit >= $this->getTime("menit", "siang")) {
-                if ($this->cekMakan(12345678, "<=", 2)) {
+                if ($this->cekMakan($id, "<=", 2)) {
                     $this->ambilMakan($id, "siang");
                 } else {
                     $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
                 }
             }
-        } elseif ($jam >= $this->getTime("jam", "sore") && $jam < 17) {
+        } elseif ($jam >= $this->getTime("jam", "sore") && $jam < 21) {
             if ($menit >= $this->getTime("menit", "sore")) {
-                if ($this->cekMakan(12345678, "<", 3)) {
+                if ($this->cekMakan($id, "<", 3)) {
                     $this->ambilMakan($id, "sore");
                 } else {
                     $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
