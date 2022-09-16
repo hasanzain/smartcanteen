@@ -31,17 +31,17 @@
                             <form action="<?= base_url('monitoring/update_karyawan_') ?>" method="post">
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
-                                        <label for="inputEmail4">NAMA</label>
-                                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $key['nama'] ?>">
-                                        <input type="text" class="form-control" id="id" name="id" value=<?= $key['id'] ?> hidden>
-                                        <?= form_error('nama', '<small class="text-danger pl-3">', '</small>'); ?>
+                                        <label for="inputEmail4">NRP</label>
+                                        <input type="text" class="form-control" id="nrp" name="nrp" value=<?= $key['nrp'] ?>>
+                                        <?= form_error('nrp', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-3">
-                                        <label for="inputEmail4">ID KARYAWAN</label>
-                                        <input type="text" class="form-control" id="idKaryawan" name="idKaryawan" value=<?= $key['id_karyawan'] ?> disabled>
-                                        <?= form_error('idKaryawan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                        <label for="inputEmail4">NAMA</label>
+                                        <input type="text" class="form-control" id="nama" name="nama" value="<?= $key['nama'] ?>">
+                                        <input type="text" class="form-control" id="id" name="id" value=<?= $key['id'] ?> hidden>
+                                        <?= form_error('nama', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -51,6 +51,29 @@
                                         <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label for="inputEmail4">ID KARTU</label>
+                                        <input type="text" class="form-control" id="idKaryawan" name="idKaryawan" value=<?= $key['id_karyawan'] ?> disabled>
+                                        <?= form_error('idKaryawan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <label for="inputEmail4">DEPARTEMEN</label>
+                                        <select class="custom-select" id="departemen" name="departemen">
+                                            <?php
+                                            foreach ($departemen->result_array() as $key) {
+                                            ?>
+                                                <option value="<?= $key['departemen_id'] ?>"><?= $key['nama'] ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                        <?= form_error('departemen', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
+                                </div>
+
                                 <input type="submit" value="Perbarui" class="btn btn-primary">
                             </form>
                         <?php

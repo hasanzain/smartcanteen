@@ -16,6 +16,8 @@ class Monitoring extends CI_Controller
     {
         $nama = $this->input->post('nama');
         $tanggal = $this->input->post('tanggal');
+        $idKaryawan = $this->input->post('idKaryawan');
+        $keterangan = $this->input->post('keterangan');
 
         if ($nama != null) {
             $this->db->where('nama', $nama);
@@ -23,6 +25,12 @@ class Monitoring extends CI_Controller
 
         if ($tanggal != null) {
             $this->db->where('tanggal', $tanggal);
+        }
+        if ($idKaryawan != null) {
+            $this->db->where('id_karyawan', $idKaryawan);
+        }
+        if ($keterangan != null) {
+            $this->db->where('keterangan', $keterangan);
         }
         // else{
         //     $this->db->where('tanggal', date("Y-m-d"));
@@ -125,9 +133,17 @@ class Monitoring extends CI_Controller
 
     public function karyawan()
     {
-        $this->db->limit(10);
+        // $this->db->limit(10);
+        $this->db->select('*');
+        $this->db->from('karyawan');
+        $this->db->join('departemen', 'departemen.departemen_id = karyawan.departemen_id');
+        $query = $this->db->get();
+
+        // var_dump($query);
+        // die;
+
         $data = array(
-            'karyawan' => $this->db->get('karyawan')
+            'karyawan' => $query
         );
 
         $this->load->view('header/header');
@@ -141,8 +157,11 @@ class Monitoring extends CI_Controller
         $id = $this->input->get('id');
         $this->db->where('id', $id);
         $this->db->limit(10);
+
         $data = array(
-            'karyawan' => $this->db->get('karyawan')
+            'karyawan' => $this->db->get('karyawan'),
+            'departemen' =>
+            $this->db->get('departemen'),
         );
 
         $this->load->view('header/header');
@@ -154,14 +173,16 @@ class Monitoring extends CI_Controller
     {
         $id = $this->input->post('id');
         $data = array(
+            'nrp' => htmlspecialchars($this->input->post('nrp')),
             'nama' => htmlspecialchars($this->input->post('nama')),
-            'email' => $this->input->post('email')
+            'email' => $this->input->post('email'),
+            'departemen_id' => htmlspecialchars($this->input->post('departemen')),
         );
 
         $this->db->where('id', $id);
 
         if ($this->db->update('karyawan', $data)) {
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Karyawan berhasil diperbarui</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data karyawan berhasil diperbarui</div>');
             redirect('monitoring/karyawan');
         } else {
             echo "error";
@@ -262,7 +283,7 @@ class Monitoring extends CI_Controller
             $this->load->view('header/footer');
         } else {
             $data = array(
-                'nrp' => htmlspecialchars($this->input->post('nama', true)),
+                'nrp' => htmlspecialchars($this->input->post('nrp', true)),
                 'nama' => htmlspecialchars($this->input->post('nama', true)),
                 'id_karyawan' => htmlspecialchars($this->input->post('idkartu', true)),
                 'departemen_id' => htmlspecialchars($this->input->post('departemen', true)),
@@ -271,7 +292,7 @@ class Monitoring extends CI_Controller
             );
             if ($this->db->insert('karyawan', $data)) {
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Karyawan berhasil ditambahkan</div>');
-                redirect('monitoring/addKaryawan');
+                redirect('monitoring/Karyawan');
             } else {
                 echo "error";
             }
@@ -280,17 +301,17 @@ class Monitoring extends CI_Controller
 
 
 
-    public function delete_user($id = NULL)
+    public function delete_karyawan($id = NULL)
     {
         $id = $this->input->get('id');
         $this->db->where('id', $id);
 
-        if ($this->db->delete('user_fingerprint')) {
+        if ($this->db->delete('karyawan')) {
             // $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil dihapus</div>');
-            redirect('monitoring/user_list');
+            redirect('monitoring/karyawan');
         } else {
             // $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data gagal dihapus</div>');
-            redirect('monitoring/user_list');
+            redirect('monitoring/karyawan');
         }
     }
 }

@@ -14,7 +14,7 @@
     <section class="content">
         <div class="container-fluid">
 
-            <form action="monitoring" method="POST">
+            <form action="<?= base_url() ?>/monitoring" method="POST">
                 <div class="input-group mb-3 col-lg-6">
                     <span class="input-group-text">Filter</span>
                     <input type="text" class="form-control" placeholder="ID Karyawan" aria-label="NRP" name="idKaryawan">
@@ -33,7 +33,7 @@
                     <button class="btn btn-outline-success" type="submit" id="button-addon2">Export Data</button>
                 </div>
             </form> -->
-                
+
 
             <div class="row">
 
@@ -54,37 +54,37 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $i=1;
+                                        $i = 1;
                                         $masuk = 0;
                                         $terlambat = 0;
                                         $tidakhadir = 0;
                                         foreach ($riwayat_makan->result_array() as $key) {
-                                            
-                                            ?>
-                                        <tr>
-                                            <th scope="row"><?= $i++ ?></th>
-                                            <td><?= $key['nama'] ?></td>
-                                            <td><?= $key['tanggal'] ?></td>
-                                            <td><?= $key['jam'] ?></td>
-                                            <td><?= $key['keterangan'] ?></td>
-                                        </tr>
+
+                                        ?>
+                                            <tr>
+                                                <th scope="row"><?= $i++ ?></th>
+                                                <td><?= $key['nama'] ?></td>
+                                                <td><?= $key['tanggal'] ?></td>
+                                                <td><?= $key['jam'] ?></td>
+                                                <td><?= $key['keterangan'] ?></td>
+                                            </tr>
                                         <?php
                                         }
                                         ?>
                                     </tbody>
                                 </table>
-                                
+
                             </div>
 
                         </div>
                     </div>
-                    
+
                     <!-- /.card-body -->
                 </div>
-                
+
 
             </div>
-            
+
             <!-- /.content-wrapper -->
     </section>
 

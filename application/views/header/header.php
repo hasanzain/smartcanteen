@@ -103,14 +103,14 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a href="<?= base_url('monitoring/jamMakan') ?>" class="nav-link">
                                     <i class="fas fa-list"></i>
                                     <p>
                                         Jam Makan
                                     </p>
                                 </a>
-                            </li>
+                            </li> -->
                         <?php
                         }
                         ?>

@@ -26,8 +26,10 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">No</th>
-                                            <th scope="col">ID KARYAWAN</th>
+                                            <th scope="col">NRP</th>
+                                            <th scope="col">ID KARTU</th>
                                             <th scope="col">NAMA</th>
+                                            <th scope="col">DEPARTEMEN</th>
                                             <th scope="col">E-MAIL</th>
                                             <th scope="col">STATUS</th>
                                             <th scope="col">#</th>
@@ -46,6 +48,7 @@
                                         ?>
                                             <tr>
                                                 <th scope="row"><?= $i++ ?></th>
+                                                <td><?= $key['nrp'] ?></td>
                                                 <td><?= $key['id_karyawan'] ?></td>
                                                 <td><?= $key['nama'] ?></td>
                                                 <td><?= $key['email'] ?></td>
@@ -57,7 +60,7 @@
                                                     <a href="<?= base_url('monitoring/update_karyawan?id=') . $key['id'] ?>">
                                                         <button type="button" class="btn btn-success">Lihat</button>
                                                     </a>
-                                                    <a href="<?= base_url('monitoring/delete_user?id=') . $key['id'] ?>">
+                                                    <a href="<?= base_url('monitoring/delete_karyawan?id=') . $key['id'] ?>">
                                                         <button type="button" class="btn btn-danger">Hapus</button>
                                                     </a>
                                                 </td>
