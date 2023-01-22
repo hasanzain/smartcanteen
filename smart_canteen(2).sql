@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2022 at 02:27 PM
+-- Generation Time: Jan 22, 2023 at 01:42 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -48,14 +48,14 @@ INSERT INTO `admin` (`id`, `username`, `password`) VALUES
 
 CREATE TABLE `departemen` (
   `departemen_id` int(11) NOT NULL,
-  `nama` varchar(10) NOT NULL
+  `nama_departemen` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `departemen`
 --
 
-INSERT INTO `departemen` (`departemen_id`, `nama`) VALUES
+INSERT INTO `departemen` (`departemen_id`, `nama_departemen`) VALUES
 (1, 'OPR'),
 (2, 'PRO'),
 (3, 'ENG'),
@@ -81,9 +81,9 @@ CREATE TABLE `jam_makan` (
 --
 
 INSERT INTO `jam_makan` (`id`, `keterangan`, `jam`) VALUES
-(1, 'pagi', '08:00:00'),
-(2, 'siang', '13:00:00'),
-(3, 'sore', '16:00:00');
+(1, 'pagi', '04:30:00'),
+(2, 'siang', '13:30:00'),
+(3, 'sore', '16:30:00');
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ INSERT INTO `jam_makan` (`id`, `keterangan`, `jam`) VALUES
 
 CREATE TABLE `karyawan` (
   `id` int(11) NOT NULL,
-  `nrp` int(11) NOT NULL,
+  `nrp` int(30) NOT NULL,
   `id_karyawan` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `departemen_id` int(11) NOT NULL,
@@ -107,8 +107,9 @@ CREATE TABLE `karyawan` (
 
 INSERT INTO `karyawan` (`id`, `nrp`, `id_karyawan`, `nama`, `departemen_id`, `email`, `status`) VALUES
 (1, 0, '12345678', 'karyawan 2', 0, 'mail@mail.com', '1'),
-(3, 0, '123', 'Hasan', 1, 'asadas', '1'),
-(5, 0, 'ads', 'asd', 1, 'asd', '1');
+(3, 113, '123', 'Hasan', 3, 'asadas@mail.com', '1'),
+(5, 145, 'ads', 'mas ganteng', 4, 'asd@mail.com', '1'),
+(6, 0, '11111', 'hasan', 1, 'asdjaklsdj', '1');
 
 -- --------------------------------------------------------
 
@@ -130,10 +131,11 @@ CREATE TABLE `riwayat_makan` (
 --
 
 INSERT INTO `riwayat_makan` (`id`, `id_karyawan`, `nama`, `tanggal`, `jam`, `keterangan`) VALUES
-(11, '12345678', 'karyawan 2', '2022-08-28', '19:08:38', ''),
-(12, '12345678', 'karyawan 2', '2022-08-28', '19:14:35', ''),
-(13, '12345678', 'karyawan 2', '2022-08-28', '19:17:19', ''),
-(14, '12345678', 'karyawan 2', '2022-09-11', '12:33:23', 'pagi');
+(14, '12345678', 'karyawan 2', '2022-09-11', '12:33:23', 'pagi'),
+(15, '12345678', 'karyawan 2', '2022-09-16', '08:30:02', 'pagi'),
+(16, '123', 'Hasan', '2022-09-16', '08:30:10', 'pagi'),
+(34, '123', 'Hasan', '2022-09-20', '15:48:09', 'pagi'),
+(35, '123', 'Hasan', '2022-09-20', '15:48:33', 'sore');
 
 --
 -- Indexes for dumped tables
@@ -195,13 +197,13 @@ ALTER TABLE `jam_makan`
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `riwayat_makan`
 --
 ALTER TABLE `riwayat_makan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Constraints for dumped tables
