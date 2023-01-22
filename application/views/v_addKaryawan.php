@@ -60,7 +60,7 @@
                                         <?php
                                         foreach ($departemen->result_array() as $key) {
                                         ?>
-                                            <option value="<?= $key['departemen_id'] ?>"><?= $key['nama'] ?></option>
+                                            <option value="<?= $key['departemen_id'] ?>"><?= $key['nama_departemen'] ?></option>
                                         <?php
                                         }
                                         ?>

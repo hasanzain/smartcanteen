@@ -51,6 +51,7 @@
                                                 <td><?= $key['nrp'] ?></td>
                                                 <td><?= $key['id_karyawan'] ?></td>
                                                 <td><?= $key['nama'] ?></td>
+                                                <td><?= $key['nama_departemen'] ?></td>
                                                 <td><?= $key['email'] ?></td>
                                                 <td><?= $status ?></td>
                                                 <td>

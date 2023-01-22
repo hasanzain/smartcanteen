@@ -61,7 +61,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="" class="brand-link">
-                <img src="<?= base_url('assets/') ?>dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="<?= base_url('assets/') ?>dist/img/RMCS.jpg" alt="RMCS Logo" class="brand-image elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">SMART CANTEEN</span>
             </a>
 
@@ -78,7 +78,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="<?= base_url('monitoring/') ?>" class="nav-link">
-                                <i class="fas fa-list"></i>
+                                <i class="fas fa-utensils"></i>
                                 <p>
                                     Riwayat Makan
                                 </p>
@@ -89,7 +89,7 @@
                         ?>
                             <li class="nav-item">
                                 <a href="<?= base_url('monitoring/karyawan') ?>" class="nav-link">
-                                    <i class="fas fa-list"></i>
+                                    <i class="fas fa-users"></i>
                                     <p>
                                         Karyawan
                                     </p>
@@ -97,7 +97,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="<?= base_url('monitoring/addKaryawan') ?>" class="nav-link">
-                                    <i class="fas fa-list"></i>
+                                    <i class="fas fa-user-plus"></i>
                                     <p>
                                         Tambahkan Karyawan
                                     </p>
@@ -114,6 +114,14 @@
                         <?php
                         }
                         ?>
+                        <li class="nav-item">
+                            <a href="<?= base_url('monitoring/export') ?>" class="nav-link">
+                                <i class="fas fa-file-export"></i>
+                                <p>
+                                    Export
+                                </p>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

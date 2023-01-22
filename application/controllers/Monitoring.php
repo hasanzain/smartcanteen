@@ -86,10 +86,19 @@ class Monitoring extends CI_Controller
     }
 
 
-    public function export_csv()
+    public function export()
+    {
+        $this->load->view('header/header');
+        $this->load->view('v_export');
+        $this->load->view('header/footer');
+    }
+
+    public function export_pdf()
     {
         $nama = $this->input->post('nama');
         $tanggal = $this->input->post('tanggal');
+        $idKaryawan = $this->input->post('idKaryawan');
+        $keterangan = $this->input->post('keterangan');
 
         if ($nama != null) {
             $this->db->where('nama', $nama);
@@ -98,23 +107,86 @@ class Monitoring extends CI_Controller
         if ($tanggal != null) {
             $this->db->where('tanggal', $tanggal);
         }
+        if ($idKaryawan != null) {
+            $this->db->where('id_karyawan', $idKaryawan);
+        }
+        if ($keterangan != null) {
+            $this->db->where('keterangan', $keterangan);
+        }
+        // else{
+        //     $this->db->where('tanggal', date("Y-m-d"));
+        // }
 
-        $file_name = 'Riwayat Akses_' . date('Ymd') . '.csv';
+        if ($tanggal != null && $nama != null) {
+            $this->db->limit(50);
+        }
+        $this->db->distinct('nama');
+
+
+        $this->db->order_by('id', "DESC");
+        $data = array(
+            'riwayat_makan' => $this->db->get('riwayat_makan'),
+            'tanggal' => $tanggal
+        );
+
+        $this->load->view('header/header');
+        $this->load->view('v_exportpdf', $data);
+        $this->load->view('header/footer');
+    }
+
+
+    public function export_csv()
+    {
+        $nama = $this->input->post('nama');
+        $tanggal = $this->input->post('tanggal');
+        $idKaryawan = $this->input->post('idKaryawan');
+        $keterangan = $this->input->post('keterangan');
+
+        if ($nama != null) {
+            $this->db->where('nama', $nama);
+        }
+
+        if ($tanggal != null) {
+            $this->db->where('tanggal', $tanggal);
+        }
+        if ($idKaryawan != null) {
+            $this->db->where('id_karyawan', $idKaryawan);
+        }
+        if ($keterangan != null) {
+            $this->db->where('keterangan', $keterangan);
+        }
+
+        $file_name = 'Riwayat Makan_' . date('Ymd') . '.csv';
         header("Content-Description: File Transfer");
         header("Content-Disposition: attachment; filename=$file_name");
         header("Content-Type: application/csv;");
 
         // get data 
-        $data = $this->db->get('login_record');
+        $data = $this->db->get('riwayat_makan');
 
         // file creation 
         $file = fopen('php://output', 'w');
 
-        $header = array("No", "Nama", "Pangkat", "Foto Masuk", "Tanggal");
+        $header = array("No", "Nama", "Tanggal", "Jam", "Keterangan");
         fputcsv($file, $header);
-        foreach ($data->result_array() as $key => $value) {
+        $no = 0;
+        foreach ($data->result_array() as $key) {
+            $no += 1;
+            $nm = $key['nama'];
+            $tgl = $key['tanggal'];
+            $jam = $key['jam'];
+            $ket = $key['keterangan'];
+            $value = array(
+                "no" => $no,
+                "nama" => $nm,
+                "tanggal" => $tgl,
+                "jam" => $jam,
+                "keterangan" => $ket,
+            );
             fputcsv($file, $value);
         }
+        // var_dump($value);
+        // die;
         fclose($file);
         exit;
     }
