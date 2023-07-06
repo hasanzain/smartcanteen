@@ -110,21 +110,22 @@ class AbsenMakan extends REST_Controller
     {
         $id = $this->get('idKaryawan');
 
-        // var_dump($id);
-        // die;
-
-        $mydate = getdate(date("U"));
-        $jam = (string) $mydate["hours"];
-        $menit = (string) $mydate["minutes"];
-        $detik = (string) $mydate["seconds"];
 
 
-        // var_dump($timeNow);
-        // die;
 
-        // $jam = 18;
-        // $menit = 31;
-        // $detik = 0;
+        // $mydate = getdate(date("U"));
+        // $jam = (string) $mydate["hours"];
+        // $menit = (string) $mydate["minutes"];
+        // $detik = (string) $mydate["seconds"];
+
+
+        // data pengujian
+
+        $jam = 12;
+        $menit = 00;
+        $detik = 00;
+
+        // end data pengujian
 
 
         $timeNow = $jam . ":" . $menit . ":" . $detik;
@@ -146,20 +147,20 @@ class AbsenMakan extends REST_Controller
             // var_dump(strtotime($timeNow) >= strtotime($this->getTime("pagi")));
             // die;
 
-            if (strtotime($timeNow) >= strtotime($this->getTime("pagi")) && strtotime($timeNow) < strtotime("12:0:0")) {
+            if (strtotime($timeNow) >= strtotime($this->getTime("pagi")) && strtotime($timeNow) <= strtotime($this->getTime("pagiMax"))) {
                 if ($this->cekMakan($id, "<=", 1, "pagi")) {
                     $this->ambilMakan($id, "pagi");
                 } else {
                     $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
                 }
-            } elseif (strtotime($timeNow) >= strtotime("12:0:0") && strtotime($timeNow) < strtotime($this->getTime("siang"))) {
+            } elseif (strtotime($timeNow) >= strtotime($this->getTime("siang")) && strtotime($timeNow) <= strtotime($this->getTime("siangMax"))) {
                 // } elseif ($jam >= $this->getTime("jam", "siang") && $jam < $this->getTime("jam", "sore")) {
                 if ($this->cekMakan($id, "<", 2, "siang")) {
                     $this->ambilMakan($id, "siang");
                 } else {
                     $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
                 }
-            } elseif (strtotime($timeNow) >= strtotime($this->getTime("sore")) && strtotime($timeNow) < strtotime("21:0:0")) {
+            } elseif (strtotime($timeNow) >= strtotime($this->getTime("sore")) && strtotime($timeNow) <= strtotime($this->getTime("soreMax"))) {
                 if ($this->cekMakan($id, "<", 1, "sore")) {
                     $this->ambilMakan($id, "sore");
                 } else {
