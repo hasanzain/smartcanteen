@@ -121,7 +121,7 @@ class AbsenMakan extends REST_Controller
 
         // data pengujian
 
-        $jam = 12;
+        $jam = 07;
         $menit = 00;
         $detik = 00;
 
@@ -148,10 +148,19 @@ class AbsenMakan extends REST_Controller
             // die;
 
             if (strtotime($timeNow) >= strtotime($this->getTime("pagi")) && strtotime($timeNow) <= strtotime($this->getTime("pagiMax"))) {
-                if ($this->cekMakan($id, "<=", 1, "pagi")) {
-                    $this->ambilMakan($id, "pagi");
+
+                if (strtotime($timeNow) <= strtotime("06:30:00")) {
+                    if ($this->cekMakan($id, "<", 1, "pagi")) {
+                        $this->ambilMakan($id, "pagi");
+                    } else {
+                        $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
+                    }
                 } else {
-                    $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
+                    if ($this->cekMakan($id, "<=", 1, "pagi")) {
+                        $this->ambilMakan($id, "pagi");
+                    } else {
+                        $this->response(array('Status' => 'SUDAH MAKAN!'), 200);
+                    }
                 }
             } elseif (strtotime($timeNow) >= strtotime($this->getTime("siang")) && strtotime($timeNow) <= strtotime($this->getTime("siangMax"))) {
                 // } elseif ($jam >= $this->getTime("jam", "siang") && $jam < $this->getTime("jam", "sore")) {
